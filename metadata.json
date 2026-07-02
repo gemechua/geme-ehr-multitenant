@@ -1,0 +1,6 @@
+{
+  "name": "HealthFlow EHR",
+  "description": "A comprehensive, secure, and paperless digital health platform designed for end-to-end patient care, with offline stability, and responsive multi-device mobile optimization to support clinics facing desktop shortages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

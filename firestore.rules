@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /beds/{id} {
+      allow read, write: if true;
+    }
+    match /clinical_encounters/{id} {
+      allow read, write: if true;
+    }
+    match /staff/{id} {
+      allow read, write: if true;
+    }
+    match /prescriptions/{id} {
+      allow read, write: if true;
+    }
+    match /appointments/{id} {
+      allow read, write: if true;
+    }
+    match /lab_results/{id} {
+      allow read, write: if true;
+    }
+    match /notification_preferences/{id} {
+      allow read, write: if true;
+    }
+    match /insurance_claims/{id} {
+      allow read, write: if true;
+    }
+    match /notifications/{id} {
+      allow read, write: if true;
+    }
+    match /patient_journey_events/{id} {
+      allow read, write: if true;
+    }
+    match /financial_ledger/{id} {
+      allow read, write: if true;
+    }
+    match /patients/{id} {
+      allow read, write: if true;
+    }
+    match /supply_items/{id} {
+      allow read, write: if true;
+    }
+    match /diagnostics/{id} {
+      allow read, write: if true;
+    }
+    match /patient_mrn_registrations/{id} {
+      allow read, write: if true;
+    }
+    match /users/{id} {
+      allow read, write: if true;
+    }
+    match /hospitals/{id} {
+      allow read, write: if true;
+    }
+    match /licenses/{id} {
+      allow read, write: if true;
+    }
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

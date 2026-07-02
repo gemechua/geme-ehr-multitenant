@@ -1,0 +1,455 @@
+{
+  "entities": {
+    "ClinicalEncounter": {
+      "title": "ClinicalEncounter",
+      "description": "A record of a patient's clinical encounter with a healthcare provider",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "encounter_type": { "type": "string" },
+        "clinic": { "type": "string" },
+        "chief_complaint": { "type": "string" },
+        "soap_subjective": { "type": "string" },
+        "soap_objective": { "type": "string" },
+        "soap_assessment": { "type": "string" },
+        "soap_plan": { "type": "string" },
+        "vitals_bp": { "type": "string" },
+        "vitals_pulse": { "type": "number" },
+        "vitals_temp": { "type": "number" },
+        "vitals_spo2": { "type": "number" },
+        "vitals_respiratory_rate": { "type": "number" },
+        "vitals_weight": { "type": "number" },
+        "diagnosis_icd10": { "type": "string" },
+        "diagnosis_text": { "type": "string" },
+        "attending_clinician": { "type": "string" },
+        "encounter_date": { "type": "string" },
+        "status": { "type": "string" },
+        "priority": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "encounter_type"]
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "Hospital staff and healthcare provider records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "staff_id": { "type": "string" },
+        "full_name": { "type": "string" },
+        "department": { "type": "string" },
+        "role": { "type": "string" },
+        "credential": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "shift": { "type": "string" },
+        "status": { "type": "string" },
+        "last_check_in": { "type": "string" }
+      },
+      "required": ["id", "full_name", "department", "role"]
+    },
+    "Prescription": {
+      "title": "Prescription",
+      "description": "A medication prescription details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "rx_id": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "prescribed_by": { "type": "string" },
+        "prescribed_at": { "type": "string" },
+        "items": { "type": "array" },
+        "diagnosis_text": { "type": "string" },
+        "notes": { "type": "string" },
+        "status": { "type": "string" },
+        "dispensed_by": { "type": "string" },
+        "dispensed_at": { "type": "string" },
+        "payer_method": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "prescribed_by"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "A patient appointment schedule",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "appointment_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "clinic": { "type": "string" },
+        "appointment_type": { "type": "string" },
+        "scheduled_at": { "type": "string" },
+        "duration_minutes": { "type": "number" },
+        "attending_clinician": { "type": "string" },
+        "reason": { "type": "string" },
+        "notes": { "type": "string" },
+        "status": { "type": "string" },
+        "reminder_sent": { "type": "boolean" }
+      },
+      "required": ["id", "patient_uid", "clinic", "scheduled_at"]
+    },
+    "LabResult": {
+      "title": "LabResult",
+      "description": "Laboratory test results for a patient",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "result_id": { "type": "string" },
+        "diagnostic_id": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "test_type": { "type": "string" },
+        "panel": { "type": "string" },
+        "result_entries": { "type": "array" },
+        "summary_text": { "type": "string" },
+        "is_critical": { "type": "boolean" },
+        "critical_flag_reason": { "type": "string" },
+        "resulted_by": { "type": "string" },
+        "resulted_at": { "type": "string" },
+        "verified_by": { "type": "string" },
+        "verified_at": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "test_type", "panel"]
+    },
+    "NotificationPreference": {
+      "title": "NotificationPreference",
+      "description": "Communication and alert configurations for users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "alert_type": { "type": "string" },
+        "in_app": { "type": "boolean" },
+        "sms": { "type": "boolean" },
+        "email": { "type": "boolean" },
+        "min_severity": { "type": "string" },
+        "enabled": { "type": "boolean" }
+      },
+      "required": ["id", "role", "alert_type"]
+    },
+    "InsuranceClaim": {
+      "title": "InsuranceClaim",
+      "description": "Insurance billing and claim filings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "claim_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "cbhi_id": { "type": "string" },
+        "insurer": { "type": "string" },
+        "claim_date": { "type": "string" },
+        "services": { "type": "array" },
+        "total_amount": { "type": "number" },
+        "approved_amount": { "type": "number" },
+        "rejection_reason": { "type": "string" },
+        "submitted_at": { "type": "string" },
+        "processed_at": { "type": "string" },
+        "reimbursed_at": { "type": "string" },
+        "submitted_by": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "insurer", "claim_date"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "In-app notifications and alerts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "severity": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "journey_stage": { "type": "string" },
+        "ward": { "type": "string" },
+        "triggered_by": { "type": "string" },
+        "channels_sent": { "type": "array" },
+        "target_roles": { "type": "array" },
+        "is_read": { "type": "boolean" },
+        "is_acknowledged": { "type": "boolean" },
+        "acknowledged_by": { "type": "string" },
+        "acknowledged_at": { "type": "string" },
+        "event_time": { "type": "string" }
+      },
+      "required": ["id", "type", "severity", "title", "message"]
+    },
+    "PatientJourneyEvent": {
+      "title": "PatientJourneyEvent",
+      "description": "Milestone events in a patient's care flow",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "stage": { "type": "string" },
+        "stage_label": { "type": "string" },
+        "location": { "type": "string" },
+        "handled_by": { "type": "string" },
+        "notes": { "type": "string" },
+        "event_time": { "type": "string" },
+        "duration_minutes": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "stage"]
+    },
+    "FinancialLedger": {
+      "title": "FinancialLedger",
+      "description": "Ledger of clinic incomes and expenses",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tx_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "service_type": { "type": "string" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "payer_method": { "type": "string" },
+        "cbhi_claim_status": { "type": "string" },
+        "tx_date": { "type": "string" },
+        "cashier": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "patient_uid", "service_type", "amount"]
+    },
+    "Patient": {
+      "title": "Patient",
+      "description": "A patient record in the EHR",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "mrn": { "type": "string" },
+        "full_name": { "type": "string" },
+        "date_of_birth": { "type": "string" },
+        "gender": { "type": "string" },
+        "phone": { "type": "string" },
+        "region": { "type": "string" },
+        "woreda": { "type": "string" },
+        "kebele": { "type": "string" },
+        "cbhi_id": { "type": "string" },
+        "cbhi_status": { "type": "string" },
+        "blood_group": { "type": "string" },
+        "allergies": { "type": "array" },
+        "chronic_conditions": { "type": "array" },
+        "emergency_contact_name": { "type": "string" },
+        "emergency_contact_phone": { "type": "string" },
+        "registration_date": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "full_name"]
+    },
+    "SupplyItem": {
+      "title": "SupplyItem",
+      "description": "Medical and clinical physical supplies and stocks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "item_code": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "location": { "type": "string" },
+        "batch_no": { "type": "string" },
+        "expiry_date": { "type": "string" },
+        "qty_on_hand": { "type": "number" },
+        "unit": { "type": "string" },
+        "reorder_level": { "type": "number" },
+        "unit_cost": { "type": "number" },
+        "supplier": { "type": "string" },
+        "last_consumption_7d": { "type": "number" },
+        "ward_consumption_daily": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "location"]
+    },
+    "Diagnostic": {
+      "title": "Diagnostic",
+      "description": "Laboratory and radiology diagnostic records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "test_id": { "type": "string" },
+        "visit_id": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "category": { "type": "string" },
+        "test_type": { "type": "string" },
+        "ordered_by": { "type": "string" },
+        "ordered_at": { "type": "string" },
+        "result": { "type": "string" },
+        "result_value": { "type": "string" },
+        "reference_range": { "type": "string" },
+        "is_critical": { "type": "boolean" },
+        "image_link": { "type": "string" },
+        "status": { "type": "string" },
+        "turnaround_minutes": { "type": "number" }
+      },
+      "required": ["id", "patient_uid", "category", "test_type"]
+    },
+    "PatientMrnRegistration": {
+      "title": "PatientMrnRegistration",
+      "description": "Unique Medical Record Number (MRN) registrations, national identities, fingerprint references, and authority clearance stamps.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "mrn": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "national_id": { "type": "string" },
+        "fingerprint_hash": { "type": "string" },
+        "registered_by": { "type": "string" },
+        "registration_date": { "type": "string" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "mrn", "patient_uid", "patient_name", "registered_by"]
+    },
+    "User": {
+      "title": "User",
+      "description": "System user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "full_name": { "type": "string" },
+        "role": { "type": "string" },
+        "created_date": { "type": "string" },
+        "updated_date": { "type": "string" },
+        "created_by_id": { "type": "string" },
+        "hospital_id": { "type": "string" }
+      },
+      "required": ["id", "email", "full_name", "role"]
+    },
+    "Hospital": {
+      "title": "Hospital",
+      "description": "A healthcare institution tenant in the EHR ecosystem",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "hospital_unique_number": { "type": "string" },
+        "name": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "hospital_unique_number", "name"]
+    },
+    "License": {
+      "title": "License",
+      "description": "An institutional software access license key",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "hospital_id": { "type": "string" },
+        "license_key": { "type": "string" },
+        "expiry_date": { "type": "string" },
+        "is_active": { "type": "boolean" }
+      },
+      "required": ["id", "hospital_id", "license_key"]
+    },
+    "Bed": {
+      "title": "Bed",
+      "description": "Real-time telemetry and admission records of clinical ward beds and patient assignments.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bed_number": { "type": "string" },
+        "ward": { "type": "string" },
+        "status": { "type": "string" },
+        "patient_uid": { "type": "string" },
+        "patient_name": { "type": "string" },
+        "admission_date": { "type": "string" },
+        "expected_discharge": { "type": "string" },
+        "attending_physician": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "bed_number", "ward"]
+    }
+  },
+  "firestore": {
+    "beds": {
+      "schema": { "$ref": "Bed" },
+      "description": "Ward beds and occupancy management"
+    },
+    "clinical_encounters": {
+      "schema": { "$ref": "ClinicalEncounter" },
+      "description": "Clinical encounter records"
+    },
+    "staff": {
+      "schema": { "$ref": "Staff" },
+      "description": "Hospital staff records"
+    },
+    "prescriptions": {
+      "schema": { "$ref": "Prescription" },
+      "description": "Patient prescriptions"
+    },
+    "appointments": {
+      "schema": { "$ref": "Appointment" },
+      "description": "Patient appointments"
+    },
+    "lab_results": {
+      "schema": { "$ref": "LabResult" },
+      "description": "Patient laboratory reports"
+    },
+    "notification_preferences": {
+      "schema": { "$ref": "NotificationPreference" },
+      "description": "User notification preferences"
+    },
+    "insurance_claims": {
+      "schema": { "$ref": "InsuranceClaim" },
+      "description": "Insurance claims ledgers"
+    },
+    "notifications": {
+      "schema": { "$ref": "Notification" },
+      "description": "System alerts and notifications"
+    },
+    "patient_journey_events": {
+      "schema": { "$ref": "PatientJourneyEvent" },
+      "description": "Patient milestones and tracker events"
+    },
+    "financial_ledger": {
+      "schema": { "$ref": "FinancialLedger" },
+      "description": "Clinic incomes and costs transactions"
+    },
+    "patients": {
+      "schema": { "$ref": "Patient" },
+      "description": "Patient medical records"
+    },
+    "supply_items": {
+      "schema": { "$ref": "SupplyItem" },
+      "description": "Medical assets and physical supplies"
+    },
+    "diagnostics": {
+      "schema": { "$ref": "Diagnostic" },
+      "description": "Imaging and advanced scanning reports"
+    },
+    "patient_mrn_registrations": {
+      "schema": { "$ref": "PatientMrnRegistration" },
+      "description": "Patient Medical Record Number (MRN) registrations"
+    },
+    "users": {
+      "schema": { "$ref": "User" },
+      "description": "Collection of authorized users"
+    },
+    "hospitals": {
+      "schema": { "$ref": "Hospital" },
+      "description": "Healthcare institutions / tenants"
+    },
+    "licenses": {
+      "schema": { "$ref": "License" },
+      "description": "Institutional access licenses"
+    }
+  }
+}
