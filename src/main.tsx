@@ -2,6 +2,7 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 // Intercept console.error and console.warn to suppress non-critical Firestore connectivity warnings
 const originalError = console.error;
@@ -38,6 +39,9 @@ import { registerSW } from 'virtual:pwa-register';
 if ('serviceWorker' in navigator) {
   registerSW();
 }
+
+// Initialize Vercel Speed Insights
+injectSpeedInsights();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
